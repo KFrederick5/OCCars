@@ -16,7 +16,9 @@
         android:id="@+id/imageView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/oc_cars_logo"/>
+        android:background="@drawable/oc_cars_logo"
+        android:src="@drawable/oc_cars_logo"
+        android:contentDescription="@string/orange_county_car_loans" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -29,4 +31,126 @@
         android:background="@color/steel_blue"
         android:textAlignment="center"
         android:textColor="@color/bone_white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/car_price"
+        android:id="@+id/monthlyPaymentTextView"
+        android:singleLine="false"
+        android:longClickable="true"
+        android:autoText="false"
+        android:elegantTextHeight="false"
+        android:layout_alignBottom="@+id/carPriceEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/dollar_sign"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/monthlyPaymentTextView"
+        android:layout_toLeftOf="@+id/carPriceEditText"
+        android:layout_toStartOf="@+id/carPriceEditText" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/carPriceEditText"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/textView6"
+        android:layout_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/down_payment"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/downPaymentEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/dollar_sign"
+        android:id="@+id/textView5"
+        android:layout_above="@+id/loanTermRadioGroup"
+        android:layout_toLeftOf="@+id/downPaymentEditText"
+        android:layout_toStartOf="@+id/downPaymentEditText" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/downPaymentEditText"
+        android:layout_below="@+id/carPriceEditText"
+        android:layout_alignLeft="@+id/carPriceEditText"
+        android:layout_alignStart="@+id/carPriceEditText" />
+
+    <RadioGroup
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/loanTermRadioGroup"
+        android:background="@color/steel_blue"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/years3"
+            android:id="@+id/threeYearsRadioButton"
+            android:textColor="@color/bone_white"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/years4"
+            android:id="@+id/fourYearsRadioButton"
+            android:textColor="@color/bone_white"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/years5"
+            android:id="@+id/fiveYearsRadioButton"
+            android:textColor="@color/bone_white"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_gravity="center_horizontal" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/loan_term"
+        android:id="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/loanTermRadioGroup" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loan_report_button_text"
+        android:id="@+id/loanReportButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
