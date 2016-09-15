@@ -6,6 +6,8 @@ package edu.orangecoastcollege.cs273.kfrederick5.occars;
  * Used to create car objects that hold the price of
  * a car and the loan prices and terms.
  */
+
+
 public class Car {
 
     /**
@@ -16,7 +18,11 @@ public class Car {
     private double mDownPayment;
     private double mLoanTerm;
     private double mPrice;
-    private static double TAX_RATE;
+    public static final double TAX_RATE = .08;
+    private double mInterestAmount;
+    private double mTaxAmount;
+    private double mBorrowed;
+
 
 
     /**
@@ -56,24 +62,28 @@ public class Car {
         mPrice = price;
     }
 
-    public void calculateBorrowedAmount(){
-
+    public double calculateBorrowedAmount(){
+        mBorrowed = (mPrice + mTaxAmount) - mDownPayment;
+        return mBorrowed;
     }
 
-    public void calculateInterestAmount(){
-
+    public double calculateInterestAmount(){
+        mInterestAmount = ((mLoanTerm == 3)? .0462: (mLoanTerm == 4)? .0416:
+                .0419) * mBorrowed;
+        return mInterestAmount;
     }
 
-    public void calculateMonthlyPayment(){
-
+    public double calculateMonthlyPayment(){
+        return (mInterestAmount + mBorrowed) * mInterestAmount/12.0;
     }
 
-    public void calculateTaxAmount(){
-
+    public double calculateTaxAmount(){
+        mTaxAmount = TAX_RATE*mPrice;
+        return mTaxAmount;
     }
 
-    public void calculateTotalCost(){
-
+    public double calculateTotalCost(){
+        return (mPrice - mDownPayment) + mTaxAmount;
     }
 
 

@@ -39,8 +39,7 @@
         android:id="@+id/loanReportTextView"
         android:layout_below="@+id/monthlyPaymentTextView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="121dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -50,5 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:elevation="4dp" />
+        android:elevation="4dp"
+        android:onClick="returnToDataEntry"
+        android:clickable="true" />
 </RelativeLayout>

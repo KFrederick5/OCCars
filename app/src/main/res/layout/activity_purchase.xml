@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.orangecoastcollege.cs273.kfrederick5.occars.PurchaseActivity">
+    tools:context="edu.orangecoastcollege.cs273.kfrederick5.occars.PurchaseActivity"
+    android:clickable="false">
 
     <ImageView
         android:layout_width="fill_parent"
@@ -130,7 +131,8 @@
             android:id="@+id/fiveYearsRadioButton"
             android:textColor="@color/bone_white"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:checked="true" />
 
     </RadioGroup>
 
@@ -151,6 +153,8 @@
         android:id="@+id/loanReportButton"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="activateLoanReport" />
 
 </RelativeLayout>

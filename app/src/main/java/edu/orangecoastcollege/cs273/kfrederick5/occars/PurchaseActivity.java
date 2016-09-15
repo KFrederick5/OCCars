@@ -1,25 +1,25 @@
 package edu.orangecoastcollege.cs273.kfrederick5.occars;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.Button;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-public class PurchaseActivity extends AppCompatActivity {
+public class PurchaseActivity extends Activity {
 
     private EditText carPriceEditText;
     private EditText downPaymentEditText;
-    private RadioButton threeYears;
     private RadioButton fourYears;
     private RadioButton fiveYears;
-    private Button loanReport;
-    private RadioGroup loanTerm;
 
-    Car newCar = new Car();
+    Car newCar;
+
+    private String monthlyPaymentText;
+    private String loanSummaryText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,58 +28,62 @@ public class PurchaseActivity extends AppCompatActivity {
 
         carPriceEditText = (EditText) findViewById(R.id.carPriceEditText);
         downPaymentEditText = (EditText) findViewById(R.id.downPaymentEditText);
-        threeYears = (RadioButton) findViewById(R.id.threeYearsRadioButton);
         fourYears = (RadioButton) findViewById(R.id.fourYearsRadioButton);
         fiveYears = (RadioButton) findViewById(R.id.fiveYearsRadioButton);
-        loanReport =  (Button) findViewById(R.id.loanReportButton);
-        loanTerm = (RadioGroup) findViewById(R.id.loanTermRadioGroup);
 
-        carPriceEditText.addTextChangedListener(priceTextChangedListener);
+        newCar = new Car();
+    }
 
-        downPaymentEditText.addTextChangedListener(downPaymentTextChangedListener);
+    public void activateLoanReport(View view)
+    {
+        double price, downPayment;
 
-        loanTerm.setOnCheckedChangeListener(loanTermChangedListener);
+        try{
+            price = Double.parseDouble(carPriceEditText.getText().toString());
+            downPayment = Double.parseDouble(downPaymentEditText.getText().toString());
+        }
+        catch (NumberFormatException e)
+        {
+            price = 0.0;
+            downPayment = 0.0;
+        }
+        int loanTerm;
+
+        if(fiveYears.isChecked())
+            loanTerm = 5;
+        else if(fourYears.isChecked())
+            loanTerm = 4;
+        else
+            loanTerm = 3;
+
+        newCar.setPrice(price);
+        newCar.setDownPayment(downPayment);
+        newCar.setLoanTerm(loanTerm);
+
+        constructLoanSummaryText();
+
+        // Create the Intent to share data with LoanSummaryActivity
+        Intent loanSummaryIntent = new Intent(this, LoanSummaryActivity.class);
+        loanSummaryIntent.putExtra("MonthlyPayment", monthlyPaymentText);
+        loanSummaryIntent.putExtra("LoanSummary",loanSummaryText);
+
+        //Start new activity
+        startActivity(loanSummaryIntent);
 
     }
 
-    private TextWatcher priceTextChangedListener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void constructLoanSummaryText()
+    {
+        monthlyPaymentText = getString(R.string.report_line1) + newCar.calculateMonthlyPayment();
+        loanSummaryText = getString(R.string.report_line2) + newCar.getPrice() +
+                getString(R.string.report_line3) + newCar.getDownPayment()  +
+                getString(R.string.report_line5) + newCar.calculateTaxAmount() +
+                getString(R.string.report_line6) + newCar.calculateTotalCost() +
+                getString(R.string.report_line7) + newCar.calculateBorrowedAmount() +
+                getString(R.string.report_line8) + newCar.calculateInterestAmount() +
+                getString(R.string.report_line4) + newCar.getLoanTerm() +
+                getString(R.string.report_line9) + getString(R.string.report_line10) +
+                getString(R.string.report_line11) + getString(R.string.report_line12);
 
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
-
-    private TextWatcher downPaymentTextChangedListener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
-
-    private RadioGroup.OnCheckedChangeListener loanTermChangedListener = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-        }
-    };
+    }
 }
