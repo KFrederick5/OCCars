@@ -7,7 +7,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.text.NumberFormat;
+
+
 public class PurchaseActivity extends Activity {
+
+    private static NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     private EditText carPriceEditText;
     private EditText downPaymentEditText;
@@ -74,14 +79,16 @@ public class PurchaseActivity extends Activity {
 
     private void constructLoanSummaryText()
     {
-        monthlyPaymentText = getString(R.string.report_line1) + newCar.calculateMonthlyPayment();
-        loanSummaryText = getString(R.string.report_line2) + newCar.getPrice() +
-                getString(R.string.report_line3) + newCar.getDownPayment()  +
-                getString(R.string.report_line5) + newCar.calculateTaxAmount() +
-                getString(R.string.report_line6) + newCar.calculateTotalCost() +
-                getString(R.string.report_line7) + newCar.calculateBorrowedAmount() +
-                getString(R.string.report_line8) + newCar.calculateInterestAmount() +
-                getString(R.string.report_line4) + newCar.getLoanTerm() +
+        monthlyPaymentText = getString(R.string.report_line1) +
+                currency.format(newCar.calculateMonthlyPayment());
+        loanSummaryText = getString(R.string.report_line2) + currency.format(newCar.getPrice()) +
+                getString(R.string.report_line3) + currency.format(newCar.getDownPayment()) +
+                getString(R.string.report_line5) + currency.format(newCar.getTaxAmount()) +
+                getString(R.string.report_line6) + currency.format(newCar.calculateTotalCost()) +
+                getString(R.string.report_line7) + currency.format(newCar.getBorrowed()) +
+                getString(R.string.report_line8) + currency.format(newCar.getInterestAmount()) +
+                getString(R.string.report_line4) + " " + newCar.getLoanTerm() + " "
+                + getString(R.string.years) +
                 getString(R.string.report_line9) + getString(R.string.report_line10) +
                 getString(R.string.report_line11) + getString(R.string.report_line12);
 

@@ -16,7 +16,7 @@ public class Car {
      * for the car object.
      */
     private double mDownPayment;
-    private double mLoanTerm;
+    private int mLoanTerm;
     private double mPrice;
     public static final double TAX_RATE = .08;
     private double mInterestAmount;
@@ -24,6 +24,17 @@ public class Car {
     private double mBorrowed;
 
 
+    public double getBorrowed() {
+        return mBorrowed;
+    }
+
+    public double getInterestAmount() {
+        return mInterestAmount;
+    }
+
+    public double getTaxAmount() {
+        return mTaxAmount;
+    }
 
     /**
      * returns the value of the down payment amount
@@ -46,12 +57,17 @@ public class Car {
      * returns the value of the loan term
      * @return
      */
-    public double getLoanTerm() {
+    public int getLoanTerm() {
         return mLoanTerm;
     }
 
-    public void setLoanTerm(double loanTerm) {
+    public void setLoanTerm(int loanTerm) {
         mLoanTerm = loanTerm;
+        calculateTaxAmount();
+        calculateBorrowedAmount();
+        calculateInterestAmount();
+        calculateMonthlyPayment();
+        calculateTotalCost();
     }
 
     public double getPrice() {
@@ -74,7 +90,7 @@ public class Car {
     }
 
     public double calculateMonthlyPayment(){
-        return (mInterestAmount + mBorrowed) * mInterestAmount/12.0;
+        return (mBorrowed + mInterestAmount) / (mLoanTerm * 12.0);
     }
 
     public double calculateTaxAmount(){
